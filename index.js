@@ -117,13 +117,13 @@
     if (isGameOver) return;
 
     const rect = canvas.getBoundingClientRect();
-    mousePos = e.clientX  - rect.left;
+    mousePos = e.clientX / parent.style.zoom - rect.left;
   });
   addEventListener("touchmove", (e) => {
     if (isGameOver) return;
 
     const rect = canvas.getBoundingClientRect();
-    mousePos = e.touches[0].clientX - rect.left;
+    mousePos = e.touches[0].clientX / parent.style.zoom - rect.left;
   });
 
   addEventListener("click", () => {
@@ -162,12 +162,12 @@
         x: -gravity.x * gravity.scale * ball.mass,
         y: -gravity.y * gravity.scale * ball.mass,
       });
-// 修正後（用於測試）
+
       if (isClicking && mousePos !== undefined) {
         ball.position.x = mousePos;
 
-        // if (mousePos > 455) ball.position.x = 455;
-        // else if (mousePos < 25) ball.position.x = 25;
+        if (mousePos > 455) ball.position.x = 455;
+        else if (mousePos < 25) ball.position.x = 25;
       }
 
       ball.position.y = 50;
